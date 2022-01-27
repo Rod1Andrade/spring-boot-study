@@ -1,8 +1,10 @@
 package com.github.rod1andrade.studyspringboot.services;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 import java.util.Optional;
 
+import com.github.rod1andrade.studyspringboot.resources.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +23,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> optionalUser = repository.findById(id);
-        return optionalUser.orElse(null);
+        return optionalUser.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User createUser(User user) {
