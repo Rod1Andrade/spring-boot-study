@@ -1,5 +1,8 @@
 package com.github.rod1andrade.studyspringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +17,8 @@ import javax.persistence.*;
  */
 @Entity(name = "tb_user")
 public class User implements Serializable {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -24,10 +28,13 @@ public class User implements Serializable {
 	private String name;
 	private String email;
 	private String phone;
+
+	@JsonIgnore
 	private String password;
 
 	@OneToMany(mappedBy = "client")
-	private List<Order> orders = new ArrayList<>();
+	@JsonIgnore
+	private final List<Order> orders = new ArrayList<>();
 
 	public User() {
 	}
