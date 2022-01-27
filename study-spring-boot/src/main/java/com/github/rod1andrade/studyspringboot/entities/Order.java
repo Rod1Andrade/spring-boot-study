@@ -2,12 +2,15 @@ package com.github.rod1andrade.studyspringboot.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.rod1andrade.studyspringboot.enums.OrderStatus;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Entidade: Order
@@ -32,6 +35,10 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
+
+    @OneToMany(mappedBy = "id.order")
+    @Getter
+    private final Set<OrderItem> items = new HashSet<>();
 
     public Order() {
     }

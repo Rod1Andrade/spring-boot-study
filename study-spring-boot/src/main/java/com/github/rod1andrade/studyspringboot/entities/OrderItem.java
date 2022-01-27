@@ -1,5 +1,6 @@
 package com.github.rod1andrade.studyspringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.rod1andrade.studyspringboot.entities.pk.OrderItemPK;
 import lombok.*;
 
@@ -19,7 +20,7 @@ public class OrderItem implements Serializable {
 
     @EmbeddedId
     @EqualsAndHashCode.Include
-    private OrderItemPK id;
+    private final OrderItemPK id = new OrderItemPK();
 
     @Getter
     @Setter
@@ -48,6 +49,7 @@ public class OrderItem implements Serializable {
         id.setOrder(order);
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }

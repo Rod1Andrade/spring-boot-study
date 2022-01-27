@@ -1,18 +1,13 @@
 package com.github.rod1andrade.studyspringboot.configs;
 
-import com.github.rod1andrade.studyspringboot.entities.Category;
-import com.github.rod1andrade.studyspringboot.entities.Order;
-import com.github.rod1andrade.studyspringboot.entities.Product;
-import com.github.rod1andrade.studyspringboot.entities.User;
+import com.github.rod1andrade.studyspringboot.entities.*;
 import com.github.rod1andrade.studyspringboot.enums.OrderStatus;
-import com.github.rod1andrade.studyspringboot.repositories.CategoryRepository;
-import com.github.rod1andrade.studyspringboot.repositories.OrderRepository;
-import com.github.rod1andrade.studyspringboot.repositories.ProductRepository;
-import com.github.rod1andrade.studyspringboot.repositories.UserRepository;
+import com.github.rod1andrade.studyspringboot.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.Instant;
 import java.util.Arrays;
@@ -32,6 +27,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Override
     public void run(String... args) {
@@ -74,6 +72,12 @@ public class TestConfig implements CommandLineRunner {
         p3.getCategories().add(c3);
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        // Mock OderItems (o2)
+        OrderItem oi1 = new OrderItem(p1, o2, 1, p1.getPrice());
+        OrderItem oi2 = new OrderItem(p3, o2, 2, p3.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2));
 
     }
 
