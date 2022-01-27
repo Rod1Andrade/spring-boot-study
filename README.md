@@ -23,6 +23,7 @@ Neste projeto eu aprendi:
 - Java 17
 - Maven
 - IntellJ Ultimate Study version
+- DBeaver
 
 ## MER
 
