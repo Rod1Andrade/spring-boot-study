@@ -75,7 +75,7 @@ public class TestConfig implements CommandLineRunner {
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
 
         // Mock OderItems (o2)
-        OrderItem oi1 = new OrderItem(p1, o2, 1, p1.getPrice());
+        OrderItem oi1 = new OrderItem(p1, o1, 2, p1.getPrice());
         OrderItem oi2 = new OrderItem(p3, o2, 2, p3.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2));

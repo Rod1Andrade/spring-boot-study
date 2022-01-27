@@ -12,7 +12,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -75,6 +74,13 @@ public class Order implements Serializable {
 
     public OrderStatus getOrderStatus() {
         return OrderStatus.valueOf(this.orderStatus);
+    }
+
+    public Double getTotal() {
+        return items.stream()
+                .map(OrderItem::getSubTotal)
+                .reduce(Double::sum)
+                .orElse(0.0);
     }
 
 }

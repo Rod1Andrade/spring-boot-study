@@ -1,5 +1,6 @@
 package com.github.rod1andrade.studyspringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -38,6 +39,7 @@ public class Payment implements Serializable {
     @MapsId
     @Getter
     @NonNull
+    @JsonIgnore
     private Order order;
 
 }
