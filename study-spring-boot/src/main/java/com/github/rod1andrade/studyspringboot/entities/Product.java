@@ -9,16 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Entidade: Category
+ * Entidade: Produto
  *
  * @author Rodrigo Andrade
  */
-@Entity(name = "tb_category")
+@Entity(name = "tb_product")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Category implements Serializable {
+public class Product implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -34,8 +34,19 @@ public class Category implements Serializable {
     @Setter
     private String name;
 
+    @Getter
+    @Setter
+    private String description;
+
+    @Getter
+    @Setter
+    private Double price;
+
+    @Getter
+    @Setter
+    private String imageUrl;
+
     @Transient
     @Getter
-    private final Set<Product> products = new HashSet<>();
-
+    private final Set<Category> categories = new HashSet<>();
 }

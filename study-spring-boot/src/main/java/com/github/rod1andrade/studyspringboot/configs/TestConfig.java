@@ -2,10 +2,12 @@ package com.github.rod1andrade.studyspringboot.configs;
 
 import com.github.rod1andrade.studyspringboot.entities.Category;
 import com.github.rod1andrade.studyspringboot.entities.Order;
+import com.github.rod1andrade.studyspringboot.entities.Product;
 import com.github.rod1andrade.studyspringboot.entities.User;
 import com.github.rod1andrade.studyspringboot.enums.OrderStatus;
 import com.github.rod1andrade.studyspringboot.repositories.CategoryRepository;
 import com.github.rod1andrade.studyspringboot.repositories.OrderRepository;
+import com.github.rod1andrade.studyspringboot.repositories.ProductRepository;
 import com.github.rod1andrade.studyspringboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Override
     public void run(String... args) {
@@ -51,6 +56,13 @@ public class TestConfig implements CommandLineRunner {
         Category c3 = new Category(null, "Home Appliance");
 
         categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+        // Mock Product
+        Product p1 = new Product(null, "Lord of Rings", "some description 1", 60.0, "https://picsum.photos/200");
+        Product p2 = new Product(null, "PC Gamer", "some description 2", 6000.0, "https://picsum.photos/200");
+        Product p3 = new Product(null, "Google Home", "some description 3", 280.0, "https://picsum.photos/200");
+
+        productRepository.saveAll(Arrays.asList(p1, p2, p3));
     }
 
 }
