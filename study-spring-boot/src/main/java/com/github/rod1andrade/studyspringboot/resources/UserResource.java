@@ -12,7 +12,7 @@ import com.github.rod1andrade.studyspringboot.services.UserService;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/user")
 public class UserResource {
 
     @Autowired
@@ -47,5 +47,12 @@ public class UserResource {
         service.deleteUser(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        user = service.updateUser(id, user);
+
+        return ResponseEntity.ok().body(user);
     }
 }
