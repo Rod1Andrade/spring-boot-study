@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Entity(name = "tb_category")
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode()
 @ToString
 public class Category implements Serializable {
 
@@ -32,6 +32,7 @@ public class Category implements Serializable {
 
     @Getter
     @Setter
+    @EqualsAndHashCode.Exclude
     private String name;
 
 }
