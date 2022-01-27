@@ -1,8 +1,10 @@
 package com.github.rod1andrade.studyspringboot.configs;
 
+import com.github.rod1andrade.studyspringboot.entities.Category;
 import com.github.rod1andrade.studyspringboot.entities.Order;
 import com.github.rod1andrade.studyspringboot.entities.User;
 import com.github.rod1andrade.studyspringboot.enums.OrderStatus;
+import com.github.rod1andrade.studyspringboot.repositories.CategoryRepository;
 import com.github.rod1andrade.studyspringboot.repositories.OrderRepository;
 import com.github.rod1andrade.studyspringboot.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @Override
     public void run(String... args) {
 
@@ -39,6 +44,13 @@ public class TestConfig implements CommandLineRunner {
         Order o3 = new Order(null, Instant.parse("2022-01-27T10:33:00Z"), OrderStatus.DELIVERED, u2);
 
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+
+        // Mock Categories
+        Category c1 = new Category(null, "Technology");
+        Category c2 = new Category(null, "Books");
+        Category c3 = new Category(null, "Home Appliance");
+
+        categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
     }
 
 }
