@@ -2,7 +2,10 @@ package com.github.rod1andrade.studyspringboot.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.rod1andrade.studyspringboot.enums.OrderStatus;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serial;
@@ -18,6 +21,8 @@ import java.util.Set;
  * @author Rodrigo Andrade
  */
 @Entity(name = "tb_order")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Order implements Serializable {
 
     @Serial
@@ -25,20 +30,33 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
+    @EqualsAndHashCode.Include
     private Long id;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @Getter
+    @Setter
     private Instant moment;
 
     private Integer orderStatus;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @Getter
+    @Setter
     private User client;
 
     @OneToMany(mappedBy = "id.order")
     @Getter
+    @ToString.Exclude
     private final Set<OrderItem> items = new HashSet<>();
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @Getter
+    @Setter
+    private Payment payment;
 
     public Order() {
     }
@@ -47,30 +65,6 @@ public class Order implements Serializable {
         this.id = id;
         this.moment = moment;
         this.orderStatus = orderStatus.getCode();
-        this.client = client;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Instant getMoment() {
-        return moment;
-    }
-
-    public void setMoment(Instant moment) {
-        this.moment = moment;
-    }
-
-    public User getClient() {
-        return client;
-    }
-
-    public void setClient(User client) {
         this.client = client;
     }
 
@@ -83,25 +77,4 @@ public class Order implements Serializable {
         return OrderStatus.valueOf(this.orderStatus);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return id.equals(order.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", moment=" + moment +
-                ", client=" + client +
-                '}';
-    }
 }

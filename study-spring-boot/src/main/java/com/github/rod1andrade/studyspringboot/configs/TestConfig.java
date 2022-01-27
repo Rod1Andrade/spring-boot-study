@@ -3,6 +3,7 @@ package com.github.rod1andrade.studyspringboot.configs;
 import com.github.rod1andrade.studyspringboot.entities.*;
 import com.github.rod1andrade.studyspringboot.enums.OrderStatus;
 import com.github.rod1andrade.studyspringboot.repositories.*;
+import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -79,6 +80,10 @@ public class TestConfig implements CommandLineRunner {
 
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2));
 
+        // Mockpayment (order o1) - Relacionamento dependente nao se chama o repository para salver
+        Payment pay1 = new Payment(null, Instant.parse("2022-01-27T12:31:23Z"), o1);
+        o1.setPayment(pay1);
+        orderRepository.save(o1);
     }
 
 }
