@@ -1,5 +1,6 @@
 package com.github.rod1andrade.studyspringboot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,7 +18,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@ToString
 public class Category implements Serializable {
 
     @Serial
@@ -34,7 +34,8 @@ public class Category implements Serializable {
     @Setter
     private String name;
 
-    @Transient
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
     @Getter
     private final Set<Product> products = new HashSet<>();
 

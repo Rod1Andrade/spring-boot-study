@@ -63,6 +63,18 @@ public class TestConfig implements CommandLineRunner {
         Product p3 = new Product(null, "Google Home", "some description 3", 280.0, "https://picsum.photos/200");
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        // Associations Product and Categories
+        p1.getCategories().add(c2);
+
+        p2.getCategories().add(c1);
+        p2.getCategories().add(c3);
+
+        p3.getCategories().add(c1);
+        p3.getCategories().add(c3);
+
+        productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
     }
 
 }
