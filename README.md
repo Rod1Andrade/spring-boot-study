@@ -16,6 +16,7 @@ Neste projeto eu aprendi:
 * Postgres SQL.
 * H2 memory database.
 * Heroku CLI
+* Database Seed
 
 ## Tecnologia
 - Heroku  Postgres
@@ -35,6 +36,7 @@ Algumas melhorias que podem tornar a aplicação mais profssional são:
 * Encrypt password (hash)
 * Usar uuid
 * Swagger para documentar a api.
+* Test de unidade
 
 ## License
 
